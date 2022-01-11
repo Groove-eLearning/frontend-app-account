@@ -1,11 +1,14 @@
 .page__account-settings {
   .banner {
     background: $dark;
-    color: $white;
+
+    h1 {
+      color: $white;
+    }
   }
 
   .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
   }
 
   h6, .h6 {
@@ -28,13 +31,13 @@
 
     >ul {
       border-radius: $border-radius-lg;
-      background: $light-100;
+      background: $light-200;
 
       >li {
-        margin-bottom: .5rem;
+        margin-bottom: .7rem;
 
-        a {
-          text-decoration: underline;
+        &:last-child {
+          margin-bottom: 0
         }
       }
     }
@@ -48,9 +51,19 @@
   .account-section {
     // These properties together will shift the hashlink position
     padding-top: 1rem;
-    margin-bottom: map-get($spacers, 3);
-    padding-bottom: map-get($spacers, 3);
-    border-bottom: 1px solid $light-300;
+
+    >.pgn-transition-replace-group,
+    >.form-group {
+      &:not(:last-child) {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: map-get($spacers, 3);
+      padding-bottom: map-get($spacers, 3);
+      border-bottom: 1px solid $light-300;
+    }
   }
 
   .custom-switch {

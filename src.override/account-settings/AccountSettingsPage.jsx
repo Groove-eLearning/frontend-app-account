@@ -784,12 +784,14 @@ class AccountSettingsPage extends React.Component {
 
     return (
       <div className="page__account-settings pb-5">
-        <div class="container py-5 mb-4 banner">
-          <h1 className="mb-0 text-uppercase">
-            {this.props.intl.formatMessage(messages['account.settings.page.heading'])}
-          </h1>
+        <div className="py-5 mb-4 banner">
+          <div className="container">
+            <h1 className="mb-0 text-uppercase">
+              {this.props.intl.formatMessage(messages['account.settings.page.heading'])}
+            </h1>
+          </div>
         </div>
-        <div class="container">
+        <div className="container">
           {this.renderDuplicateTpaProviderMessage()}
           <div className="row">
             <div className="col-md-3">
