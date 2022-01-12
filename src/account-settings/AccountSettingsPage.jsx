@@ -784,7 +784,7 @@ class AccountSettingsPage extends React.Component {
 
     return (
       <div className="page__account-settings pb-5">
-        <div className="py-5 mb-4 banner">
+        <div className="mb-4 banner">
           <div className="container">
             <h1 className="mb-0 text-uppercase">
               {this.props.intl.formatMessage(messages['account.settings.page.heading'])}
