@@ -262,6 +262,7 @@ class AccountSettingsPage extends React.Component {
   renderFullNameHelpText = (status) => {
     if (
       !this.props.verifiedNameHistory
+      || !this.props.verifiedNameEnabled
     ) {
       return this.props.intl.formatMessage(messages['account.settings.field.full.name.help.text']);
     }
@@ -470,7 +471,7 @@ class AccountSettingsPage extends React.Component {
     // Show State field only if the country is US (could include Canada later)
     const showState = this.props.formValues.country === COUNTRY_WITH_STATES;
 
-    const { verifiedName } = this.props;
+    const { verifiedName, verifiedNameEnabled } = this.props;
 
     const timeZoneOptions = this.getLocalizedTimeZoneOptions(
       this.props.timeZoneOptions,
@@ -483,7 +484,7 @@ class AccountSettingsPage extends React.Component {
       <>
         <div className="account-section" id="basic-information" ref={this.navLinkRefs['#basic-information']}>
           {
-            this.props.mostRecentVerifiedName
+            verifiedNameEnabled && this.props.mostRecentVerifiedName
             && this.renderVerifiedNameMessage(this.props.mostRecentVerifiedName)
           }
 
@@ -511,7 +512,8 @@ class AccountSettingsPage extends React.Component {
             name="name"
             type="text"
             value={
-              verifiedName?.status === 'submitted'
+              verifiedNameEnabled
+              && verifiedName?.status === 'submitted'
               && this.props.formValues.pending_name_change
                 ? this.props.formValues.pending_name_change
                 : this.props.formValues.name
@@ -523,22 +525,22 @@ class AccountSettingsPage extends React.Component {
                 : this.renderEmptyStaticFieldMessage()
             }
             helpText={
-              verifiedName
+              verifiedNameEnabled && verifiedName
                 ? this.renderFullNameHelpText(verifiedName.status)
                 : this.props.intl.formatMessage(messages['account.settings.field.full.name.help.text'])
             }
             isEditable={
-              verifiedName
+              verifiedNameEnabled && verifiedName
                 ? this.isEditable('verifiedName') && this.isEditable('name')
                 : this.isEditable('name')
             }
             isGrayedOut={
-              verifiedName && !this.isEditable('verifiedName')
+              verifiedNameEnabled && verifiedName && !this.isEditable('verifiedName')
             }
             onChange={this.handleEditableFieldChange}
             onSubmit={this.handleSubmitProfileName}
           />
-          {verifiedName
+          {verifiedNameEnabled && verifiedName
             && (
             <EditableField
               name="verified_name"
@@ -581,18 +583,15 @@ class AccountSettingsPage extends React.Component {
           />
           {this.renderSecondaryEmailField(editableFieldProps)}
           <ResetPassword email={this.props.formValues.email} />
-          {(!getConfig().ENABLE_COPPA_COMPLIANCE)
-            && (
-            <EditableField
-              name="year_of_birth"
-              type="select"
-              label={this.props.intl.formatMessage(messages['account.settings.field.dob'])}
-              emptyLabel={this.props.intl.formatMessage(messages['account.settings.field.dob.empty'])}
-              value={this.props.formValues.year_of_birth}
-              options={yearOfBirthOptions}
-              {...editableFieldProps}
-            />
-            )}
+          <EditableField
+            name="year_of_birth"
+            type="select"
+            label={this.props.intl.formatMessage(messages['account.settings.field.dob'])}
+            emptyLabel={this.props.intl.formatMessage(messages['account.settings.field.dob.empty'])}
+            value={this.props.formValues.year_of_birth}
+            options={yearOfBirthOptions}
+            {...editableFieldProps}
+          />
           <EditableField
             name="country"
             type="select"
@@ -787,7 +786,7 @@ class AccountSettingsPage extends React.Component {
         <div className="mb-4 banner">
           <div className="container">
             <h1 className="mb-0 text-uppercase">
-              {this.props.intl.formatMessage(messages['account.settings.page.heading'])}
+             {this.props.intl.formatMessage(messages['account.settings.page.heading'])}
             </h1>
           </div>
         </div>
@@ -889,6 +888,7 @@ AccountSettingsPage.propTypes = {
   nameChangeModal: PropTypes.shape({
     formId: PropTypes.string,
   }),
+  verifiedNameEnabled: PropTypes.bool,
   verifiedName: PropTypes.shape({
     verified_name: PropTypes.string,
     status: PropTypes.string,
@@ -925,6 +925,7 @@ AccountSettingsPage.defaultProps = {
   isActive: true,
   secondary_email_enabled: false,
   nameChangeModal: {},
+  verifiedNameEnabled: false,
   verifiedName: null,
   mostRecentVerifiedName: {},
   verifiedNameHistory: [],
