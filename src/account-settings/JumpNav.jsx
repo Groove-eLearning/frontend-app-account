@@ -20,7 +20,7 @@ function JumpNav({ intl, displayDemographicsLink }) {
           'linked-accounts',
           'delete-account',
         ]}
-        className="list-unstyled p-4"
+        className="list-unstyled"
         currentClassName="font-weight-bold"
       >
         <li>

@@ -122,7 +122,7 @@ function EmailField(props) {
                 onChange={handleChange}
               />
             </ValidationFormGroup>
-            <p className="mb-0 mt-3">
+            <p>
               <StatefulButton
                 type="submit"
                 className="mr-2"
@@ -162,8 +162,8 @@ function EmailField(props) {
                 </Button>
               ) : null}
             </div>
-            <p data-hj-suppress className="mb-0">{renderValue()}</p>
-            {renderConfirmationMessage() || <p className="small text-muted mb-0">{helpText}</p>}
+            <p data-hj-suppress>{renderValue()}</p>
+            {renderConfirmationMessage() || <p className="small text-muted mt-n2">{helpText}</p>}
           </div>
         ),
       }}

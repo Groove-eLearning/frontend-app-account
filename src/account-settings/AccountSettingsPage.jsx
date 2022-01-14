@@ -782,16 +782,12 @@ class AccountSettingsPage extends React.Component {
     } = this.props;
 
     return (
-      <div className="page__account-settings pb-5">
-        <div className="mb-4 banner">
-          <div className="container">
-            <h1 className="mb-0 text-uppercase">
-             {this.props.intl.formatMessage(messages['account.settings.page.heading'])}
-            </h1>
-          </div>
-        </div>
-        <div className="container">
-          {this.renderDuplicateTpaProviderMessage()}
+      <div className="page__account-settings container-fluid py-5">
+        {this.renderDuplicateTpaProviderMessage()}
+        <h1 className="mb-4">
+          {this.props.intl.formatMessage(messages['account.settings.page.heading'])}
+        </h1>
+        <div>
           <div className="row">
             <div className="col-md-3">
               <JumpNav

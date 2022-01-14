@@ -125,7 +125,7 @@ function EditableField(props) {
                 />
                 <>{others.children}</>
               </ValidationFormGroup>
-              <p className="mb-0 mt-3">
+              <p>
                 <StatefulButton
                   type="submit"
                   className="mr-2"
@@ -166,8 +166,8 @@ function EditableField(props) {
                 </Button>
               ) : null}
             </div>
-            <p data-hj-suppress className={`mb-0 ${isGrayedOut ? 'grayed-out' : null}`}>{renderValue(value)}</p>
-            <p className="small text-muted mb-0">{renderConfirmationMessage() || helpText}</p>
+            <p data-hj-suppress className={isGrayedOut ? 'grayed-out' : null}>{renderValue(value)}</p>
+            <p className="small text-muted mt-n2">{renderConfirmationMessage() || helpText}</p>
           </div>
         ),
       }}
