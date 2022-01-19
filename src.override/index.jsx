@@ -26,17 +26,19 @@ subscribe(APP_READY, () => {
     <AppProvider store={configureStore()}>
       <Switch>
         <Route path="/coaching_consent" component={CoachingConsent} />
-        <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
+        <div className="d-flex flex-column vh-100">
           <Header />
-          <main className="flex-grow-1">
-            <Switch>
-              <Route path="/id-verification" component={IdVerificationPage} />
-              <Route exact path="/" component={AccountSettingsPage} />
-              <Route path="/notfound" component={NotFoundPage} />
-              <Route path="*" component={NotFoundPage} />
-            </Switch>
-          </main>
-          <Footer />
+          <div className="overflow-auto flex-grow-1 d-flex flex-column h-0">
+            <main className="flex-grow-1">
+              <Switch>
+                <Route path="/id-verification" component={IdVerificationPage} />
+                <Route exact path="/" component={AccountSettingsPage} />
+                <Route path="/notfound" component={NotFoundPage} />
+                <Route path="*" component={NotFoundPage} />
+              </Switch>
+            </main>
+            <Footer />
+          </div>
         </div>
       </Switch>
     </AppProvider>,
